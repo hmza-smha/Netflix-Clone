@@ -6,7 +6,7 @@ export default function MoviesList({ movies }) {
     let styles = {
         display:"flex",
         flexWrap:"wrap",
-        justifyContent:"space-between"
+        justifyContent:"space-evenly"
     };
     return (
         <>
