@@ -12,6 +12,39 @@ export default function ModalMovie({ movies }) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    function handelFormSubmit(e) {
+        e.preventDefault();
+        let comment = e.target.comment.value;
+        addToFavList(movies, comment);
+    }
+
+    async function addToFavList(movies, comment) {
+
+        console.log(movies);
+        console.log(comment);
+
+        const url = "https://hamza-movies-library.herokuapp.com/addMovie"
+        // // This should match the required data in the server
+        const data = {
+            id: movies.id,
+            title: movies.title,
+            release_date: movies.release_date,
+            poster_path: movies.poster_path,
+            overview: movies.overview,
+            comment: comment
+        }
+        // Use Fetch to send POST request
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        handleClose();
+    }
+
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -31,20 +64,16 @@ export default function ModalMovie({ movies }) {
                     {movies.release_date} <br />
                     {movies.overview}
                 </Modal.Body>
-                <Form>
+
+                <Form onSubmit={handelFormSubmit} style={{ margin: "10px" }}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="email" placeholder="add comment" />
+                        <Form.Label>Comment</Form.Label>
+                        <Form.Control name="comment" type="text" placeholder="Enter Comment" />
                     </Form.Group>
-                </Form>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Cancel
+                    <Button variant="primary" type="submit">
+                        Save
                     </Button>
-                    <Button variant="primary">Save changes!</Button>
-                </Modal.Footer>
-
-                
-
+                </Form>
 
             </Modal>
         </>
