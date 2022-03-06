@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MoviesList from '../MovieList/MovieList';
+import NavBar from '../Navbar/Navbar';
 
 export default function Home() {
   // every time movies changed, react will re-render this component;
@@ -20,7 +21,7 @@ export default function Home() {
 
     return (
       <>
-      <h1>This is home</h1>
+      <NavBar />
       {movies && <MoviesList movies={movies} />}
       </>
     )

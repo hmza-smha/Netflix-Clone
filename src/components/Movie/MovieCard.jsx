@@ -14,7 +14,7 @@ export default function MovieCard({movie}){
                     {movie.release_date}
                 </Card.Text>
                 <Card.Text>
-                    <img style={{width:"200px"}} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}></img>
+                    <img style={{width:"200px"}} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="pic"></img>
                 </Card.Text>
             </Card.Body>
             <ModalMovie movies={movie} />
